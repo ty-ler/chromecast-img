@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.device-list-container,
+.no-devices-found {
+}
+
+.device-list-container {
+  max-height: 100px;
+  width: 100%;
+
+  border: 1px solid rgba(black, 0.2);
+  border-radius: 4px;
+  max-height: 61px;
+  overflow: auto;
+
+  .device {
+    display: flex;
+    align-items: center;
+
+    font-size: 12px;
+    user-select: none;
+    cursor: pointer;
+    color: #282828;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(black, 0.2);
+    }
+
+    .check {
+      margin: 0 0.5rem;
+      color: #55b8ff;
+      // transform: scale(0.8);
+      font-weight: bold;
+    }
+
+    span {
+      display: inline-block;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    &.disabled {
+      color: #eee;
+      pointer-events: none;
+    }
+  }
+}
+
+.no-devices-found {
+}

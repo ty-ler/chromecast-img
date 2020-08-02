@@ -1,0 +1,122 @@
+<div class="title-container">
+  <div class="controls">
+    <div class="left-container">
+      <div class="section-title">Directory</div>
+      <button
+        mat-flat-button
+        color="primary"
+        class="open-button"
+        (click)="onOpenDirectoryButtonClick()"
+      >
+        <span>Open</span>
+        <div
+          class="menu-trigger"
+          (click)="$event.stopPropagation()"
+          [matMenuTriggerFor]="openOptions"
+        >
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </div>
+        <mat-menu #openOptions class="open-options-menu">
+          <button mat-menu-item (click)="onOpenDirectoryButtonClick(false)">
+            <mat-icon>folder_open</mat-icon>
+            <span>Open Single Directory</span>
+          </button>
+        </mat-menu>
+      </button>
+    </div>
+    <div class="right-container">
+      <div
+        class="selected-actions-container"
+        *ngIf="directorySelected === true && loadingDirectory === false"
+      >
+        <button
+          mat-icon-button
+          [disabled]="
+            selectedImages.length <= 0 ||
+            selectedDevice === null ||
+            attemptingSlideshowPlay === true
+          "
+          [matTooltip]="
+            slideshowPlaying === false ? 'Start Streaming' : 'Stop Streaming'
+          "
+          matTooltipPosition="above"
+          (click)="onPlayStopClick()"
+        >
+          <mat-icon>{{
+            slideshowPlaying === false ? 'play_arrow' : 'stop'
+          }}</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="onClearSelectedImages()"
+          [disabled]="
+            selectedImages.length <= 0 ||
+            attemptingSlideshowPlay === true ||
+            slideshowPlaying === true
+          "
+          matTooltip="Clear All"
+          matTooltipPosition="above"
+        >
+          <mat-icon>clear_all</mat-icon>
+        </button>
+      </div>
+      <button
+        mat-icon-button
+        (click)="onSelectAllImages()"
+        [disabled]="
+          allImagesSelected === true ||
+          attemptingSlideshowPlay === true ||
+          slideshowPlaying === true
+        "
+        *ngIf="directorySelected === true && loadingDirectory === false"
+        matTooltip="Select All"
+        matTooltipPosition="above"
+      >
+        <mat-icon>select_all</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div
+    class="selected-path-container"
+    *ngIf="
+      directorySelected === true &&
+      loadingDirectory === false &&
+      selectedDirectoryPath !== null
+    "
+  >
+    {{ selectedDirectoryPath }}
+  </div>
+</div>
+<div
+  class="directory"
+  *ngIf="directorySelected === true; else directoryNotSelected"
+>
+  <div class="image-grid" *ngIf="loadingDirectory === false">
+    <div
+      class="image-thumbnail"
+      *ngFor="let image of images"
+      (click)="onSelectImage(image)"
+      [class.selected]="image.selected === true"
+      [class.streaming]="image.id === slideshowImage?.id"
+      [matTooltip]="image.fileName"
+      matTooltipPosition="above"
+      [matTooltipShowDelay]="250"
+    >
+      <img [src]="image | imageToBase64Image" (dragstart)="(false)" />
+    </div>
+  </div>
+  <ng-template
+    [ngTemplateOutlet]="loadingTemplate"
+    *ngIf="loadingDirectory === true"
+  ></ng-template>
+</div>
+
+<ng-template #directoryNotSelected>
+  <div class="dir-not-selected">
+    <div>No Directory Selected</div>
+  </div>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <strong>Loading...</strong>
+</ng-template>

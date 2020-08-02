@@ -1,0 +1,25 @@
+<div class="section-title">Devices</div>
+<div
+  class="device-list-container"
+  *ngIf="devices.length > 0; else noDevicesFound"
+>
+  <div
+    *ngFor="let device of devices"
+    class="device"
+    [class.selected]="device.name === selectedDevice?.name"
+    (click)="selectDevice(device)"
+  >
+    <mat-icon *ngIf="device.name === selectedDevice?.name" class="check"
+      >check</mat-icon
+    >
+    <span>
+      {{ device.friendlyName }}
+    </span>
+  </div>
+</div>
+
+<ng-template #noDevicesFound>
+  <div class="no-devices-found">
+    <span>No Devices Found</span>
+  </div>
+</ng-template>

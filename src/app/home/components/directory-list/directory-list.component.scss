@@ -1,0 +1,129 @@
+:host {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+}
+
+.dir-not-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.title-container {
+  margin-bottom: 1rem;
+  min-height: 40px;
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .right-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .section-title {
+    margin: 0;
+  }
+
+  ::ng-deep .open-button {
+    padding-right: 0 !important;
+    margin-left: 1rem;
+
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+
+      .menu-trigger {
+        display: flex;
+        align-items: center;
+
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .selected-path-container {
+    color: rgba(black, 0.65);
+    margin-top: 0.5rem;
+  }
+}
+
+.directory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: auto;
+  border-top: 3px solid rgba(black, 0.1);
+
+  .image-grid {
+    align-self: flex-start;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    place-items: center;
+    grid-gap: 4px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 7px;
+
+    .image-thumbnail {
+      cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: 3px solid transparent;
+      border-radius: 4px;
+
+      $thumbnailSize: 60px;
+
+      min-width: $thumbnailSize;
+      max-width: $thumbnailSize;
+      min-height: $thumbnailSize;
+      max-height: $thumbnailSize;
+
+      transition: border 0.25 ease-in-out 0s;
+
+      &:hover {
+        border-color: rgba(#55b8ff, 0.5);
+      }
+
+      &.selected {
+        border-color: rgba(#55b8ff, 1);
+        // border-style: dashed;
+      }
+
+      &.streaming {
+        border-color: greenyellow;
+      }
+
+      img {
+        min-width: inherit;
+        max-width: inherit;
+        min-height: inherit;
+        max-height: inherit;
+      }
+    }
+  }
+}
+
+::ng-deep .open-options-menu {
+  min-height: 0 !important;
+
+  .mat-menu-content {
+    padding: 0 !important;
+  }
+}

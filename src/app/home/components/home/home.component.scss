@@ -1,0 +1,16 @@
+:host {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto auto 1fr;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(black, 0.2);
+
+  margin: 1rem 0;
+}
+
+.directory-container {
+  overflow: auto;
+}
