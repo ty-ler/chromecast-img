@@ -97,7 +97,7 @@
     "fast-glob": "3.2.4",
     "fs-extra": "9.0.1",
     "image-thumbnail": "1.0.10",
-    "lodash-es": "4.17.15",
+    "lodash-es": "4.17.21",
     "mime-types": "2.1.27",
     "sanitize-filename": "1.6.3",
     "uuid": "8.3.0"
